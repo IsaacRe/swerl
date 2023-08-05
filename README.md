@@ -15,8 +15,11 @@ The SWERL Sandbox includes the following components that are accessible through 
 - git
 
 ### Setup
-#### Minikube
-To use the K8s tool, you will need to set up minikube on your system, following [this guide](https://minikube.sigs.k8s.io/docs/start/).
+#### Sysbox
+Follow these [instructions](https://github.com/nestybox/sysbox/blob/master/docs/user-guide/install-package.md#installing-sysbox) to setup sysbox on your local machine.
+
+##### WSL
+If using WSL/WSL2, systemd must be enabled following these [instructions](https://askubuntu.com/questions/1379425/system-has-not-been-booted-with-systemd-as-init-system-pid-1-cant-operate).
 
 ### Running Sandbox
 ```bash
