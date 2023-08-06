@@ -5,7 +5,7 @@
 # https://docs.docker.com/compose/install/
 #
 
-FROM nestybox/ubuntu-jammy-docker:latest
+FROM nestybox/ubuntu-jammy-docker:latest@sha256:51800f91a087a916a365a019fff9c435d186725ee94ec9068b4ad3580c230880
 
 # install docker-compose
 RUN curl -Lo /usr/local/bin/docker-compose "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" && \
@@ -28,17 +28,13 @@ RUN apt-get update && apt-get install -y \
     python3-wheel
 
 # install API dependencies
-RUN pip install fastapi
-RUN pip install uvicorn
-RUN pip install pydantic
-RUN pip install pexpect
+RUN pip install fastapi==0.101.0 uvicorn==0.23.2 pydantic==2.1.1 pexpect==4.8.0
 
-COPY local-dev/run_sandbox.py /app/
-COPY local-dev/run.sh /app/
+COPY sandbox_service.py run.sh /app/
 RUN chmod +x /app/run.sh
 
 WORKDIR /app
 
 EXPOSE 8000
-# TODO not closing on ^C
-CMD ["/app/run.sh"]
+
+ENTRYPOINT ["/app/run.sh"]
